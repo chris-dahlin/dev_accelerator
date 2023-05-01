@@ -1,0 +1,32 @@
+body {
+    background-color: rgb(34, 34, 34);
+    color: rgb(196, 196, 196);
+    ;
+    }
+  
+.slideshow-container {
+    max-width: 1200px;
+    position: relative;
+    margin: auto;
+    }
+    
+.mySlides {
+    display: none;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    }
+
+h1 {
+  text-align: center;
+}
+
+.buttonBox {
+  display: flex;
+  justify-content: center; /* This centers the flex items horizontally */
+  
+}
+
+button {
+  margin: 20px 10px; /* This adds a small amount of space between the buttons */
+}
