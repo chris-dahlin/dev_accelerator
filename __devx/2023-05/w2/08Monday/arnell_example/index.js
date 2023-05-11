@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const app = express();
-
+app.use(express.json());
 // Use the body-parser middleware to parse request bodies
 app.use(bodyParser.urlencoded({ extended: true }));
 
