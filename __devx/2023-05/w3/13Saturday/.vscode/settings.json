@@ -1,0 +1,12 @@
+{
+  "auto-rename-tag.activationOnLanguage": ["*"],
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.singleQuote": true,
+  "prettier.semi": false,
+  "editor.fontLigatures": false,
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  }
+}
