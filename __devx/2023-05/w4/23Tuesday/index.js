@@ -1,13 +1,14 @@
-// ReactDOM.render(<h1>Hello, everyone!</h1>, document.getElementById("root"));
-
-// ReactDOM.render(<p>Hi, my name is Chris</p>, document.getElementById("root"));
-const page = (
-  <div>
-    <h1 className="header">This is JSX</h1>
-    <p>This is a paragraph</p>
-  </div>
+import React from "react";
+import ReactDom from "react-dom";
+const NavBar = (
+  <nav>
+    <h1>Bob's Bistro</h1>
+    <ul>
+      <li>Menu</li>
+      <li>About</li>
+      <li>Contact</li>
+    </ul>
+  </nav>
 );
 
-console.log(page);
-
-ReactDOM.render(page, document.getElementById("root"));
+ReactDOM.render(NavBar, document.getElementById("root"));
