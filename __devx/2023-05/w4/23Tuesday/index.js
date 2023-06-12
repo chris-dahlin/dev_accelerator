@@ -1,14 +1,6 @@
 import React from "react";
-import ReactDom from "react-dom";
-const NavBar = (
-  <nav>
-    <h1>Bob's Bistro</h1>
-    <ul>
-      <li>Menu</li>
-      <li>About</li>
-      <li>Contact</li>
-    </ul>
-  </nav>
-);
+import ReactDOM from "react-dom";
 
-ReactDOM.render(NavBar, document.getElementById("root"));
+const page = <h1>Testing</h1>;
+
+ReactDOM.render(page, document.getElementById("root"));
