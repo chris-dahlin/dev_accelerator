@@ -94,29 +94,29 @@ export default function Form() {
 
 				{
 					text: `${formData.initials}-${formData.voucher}-${formData.costCode}`,
-					fontSize: 18,
+					fontSize: 16,
 					bold: false,
 					margin: [0, 0, 0, 0], // Add margin at the bottom of the line
 					alignment: "left",
 					absolutePosition: { x: 435, y: 460 },
 				},
 
-				{
-					text: `Message`,
-					fontSize: 14,
-					bold: true,
-					margin: [0, 0, 0, 15], // Add margin at the bottom of the line
-					alignment: "left",
-					absolutePosition: { x: 35, y: 550 },
-				},
+				// {
+				// 	text: `Message`,
+				// 	fontSize: 14,
+				// 	bold: true,
+				// 	margin: [0, 0, 0, 15], // Add margin at the bottom of the line
+				// 	alignment: "left",
+				// 	absolutePosition: { x: 35, y: 550 },
+				// },
 
 				{
-					text: `${formData.message}`,
-					fontSize: 14,
+					text: `( ${formData.message} )`,
+					fontSize: 8,
 					bold: false,
 					margin: [0, 0, 0, 15], // Add margin at the bottom of the line
 					alignment: "left",
-					absolutePosition: { x: 110, y: 575 },
+					absolutePosition: { x: 130, y: 460 },
 				},
 
 				// 		{
@@ -157,7 +157,7 @@ export default function Form() {
 			],
 		};
 		// Generate the PDF
-		pdfMake.createPdf(docDefinition).download("ButterSpaGiftCertificate.pdf");
+		pdfMake.createPdf(docDefinition).download("Butter Spa GiftCertificate.pdf");
 	}
 	return (
 		<main>
@@ -169,6 +169,17 @@ export default function Form() {
 						placeholder=" "
 						name="recipientFirstName"
 						value={formData.recipientFirstName}
+						onChange={handleChange}
+						required
+					/>
+					<br />
+					<br />
+					<label htmlFor="RecipientLastName">Recipient Last Name:</label>
+					<input
+						type="text"
+						placeholder=" "
+						name="RecipientLastName"
+						value={formData.RecipientLastName}
 						onChange={handleChange}
 						required
 					/>
@@ -188,7 +199,7 @@ export default function Form() {
 					<label htmlFor="giftDescription">Gift Description:</label>
 					<input
 						type="text"
-						placeholder="gift Description"
+						placeholder="Gift Description"
 						name="giftDescription"
 						value={formData.giftDescription}
 						onChange={handleChange}
@@ -199,7 +210,7 @@ export default function Form() {
 					<label htmlFor="amount">Amount:</label>
 					<input
 						type="text"
-						placeholder="$$$$"
+						placeholder="$$$"
 						name="amount"
 						value={formData.amount}
 						onChange={handleChange}
@@ -294,7 +305,7 @@ export default function Form() {
 					/>
 					<br />
 					<br />
-					<label htmlFor="recipientLastName"> Recipient Last Name:</label>
+					{/* <label htmlFor="recipientLastName"> Recipient Last Name:</label>
 					<input
 						type="text"
 						placeholder="Recipient Last Name"
@@ -304,11 +315,11 @@ export default function Form() {
 						required
 					/>
 					<br />
-					<br />
+					<br /> */}
 					<label htmlFor="recipientEmail">Recipient Email:</label>
 					<input
 						type="email"
-						placeholder="recipient email Address"
+						placeholder="Recipient email Address"
 						name="recipientEmail"
 						value={formData.recipientEmail}
 						onChange={handleChange}
