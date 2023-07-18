@@ -157,7 +157,9 @@ export default function Form() {
 			],
 		};
 		// Generate the PDF
-		pdfMake.createPdf(docDefinition).download("Butter Spa GiftCertificate.pdf");
+		pdfMake
+			.createPdf(docDefinition)
+			.download("Butter Spa Gift Certificate.pdf");
 	}
 	return (
 		<main>
