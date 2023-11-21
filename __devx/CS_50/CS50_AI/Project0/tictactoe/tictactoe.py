@@ -4,6 +4,7 @@ Tic Tac Toe Player
 
 import math
 import copy
+import board
 
 X = "X"
 O = "O"
@@ -47,7 +48,7 @@ def actions(board):
     for row in range(len(board)):
         for col in range(len(board[0])):
             if board[row][col] == EMPTY:
-                allMovesAvailable.add(row(row,col))
+                allMovesAvailable.add((row,col))
 
     return allMovesAvailable
 
@@ -116,6 +117,16 @@ def terminal(board):
     """
     Returns True if game is over, False otherwise.
     """
+    if winner(board) == X:
+        return True
+    elif winner(board) == O:
+        return True
+    
+    for row in range(len(board)):
+        for col in range(len(board[row])):
+            if board[row][col] == EMPTY:
+                return False
+    return True
 
 
 
@@ -123,11 +134,45 @@ def utility(board):
     """
     Returns 1 if X has won the game, -1 if O has won, 0 otherwise.
     """
-    raise NotImplementedError
+    if winner(board) == X:
+        return 1
+    elif winner(board) == O:
+        return -1
+    else:
+        return 0
 
+def max_value(board):
+    v = -math.inf
+    if terminal(board):
+        return utility(board)
+    for action in actions(board):
+        v = max(v, min_value(result(board, action)))
+    return v
+ 
+def min_value(board):
+    v = math.inf
+    if terminal(board):
+        return utility(board)
+    for action in actions(board):
+        v = min(v, max_value(result(board, action)))
+    return v
 
 def minimax(board):
     """
     Returns the optimal action for the current player on the board.
     """
-    raise NotImplementedError
+    if terminal(board):
+        return None
+    elif player(board) == X:
+        plays = []
+        for action in actions(board):
+            plays.append((min_value(result(board, action)), action))
+    
+        return sorted(plays, key=lambda x: x[0], reverse=True)[0][1]
+
+    elif player(board) == O:
+        plays = []
+    for action in actions(board):
+        plays.append((max_value(result(board, action)), action))
+    
+    return sorted(plays, key=lambda x: x[0])[0][1]
