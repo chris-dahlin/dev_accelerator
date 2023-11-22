@@ -11,6 +11,8 @@ for person in people:
     for house in houses:
         symbols.append(Symbol(f"{person}{house}"))
 
+# print(symbols)
+
 # Each person belongs to a house.
 for person in people:
     knowledge.add(Or(
@@ -53,3 +55,5 @@ knowledge.add(
 for symbol in symbols:
     if model_check(knowledge, symbol):
         print(symbol)
+
+# print(knowledge.formula())
