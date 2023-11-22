@@ -11,4 +11,6 @@ knowledge = And(
     dumbledore
 )
 
+# print(knowledge.formula())
+
 print(model_check(knowledge, rain))

@@ -35,18 +35,20 @@ knowledge = And(
     Or(knife, revolver, wrench)
 )
 
-# Initial cards
-knowledge.add(And(
-    Not(mustard), Not(kitchen), Not(revolver)
-))
 
-# Unknown card
-knowledge.add(Or(
-    Not(scarlet), Not(library), Not(wrench)
-))
 
-# Known cards
-knowledge.add(Not(plum))
-knowledge.add(Not(ballroom))
+# # Initial cards
+# knowledge.add(And(
+#     Not(mustard), Not(kitchen), Not(revolver)
+# ))
+
+# # Unknown card
+# knowledge.add(Or(
+#     Not(scarlet), Not(library), Not(wrench)
+# ))
+
+# # Known cards
+# knowledge.add(Not(plum))
+# knowledge.add(Not(ballroom))
 
 check_knowledge(knowledge)
