@@ -54,3 +54,6 @@ knowledge.add(And(
 for symbol in symbols:
     if model_check(knowledge, symbol):
         print(symbol)
+
+
+# Goes through color sequence and finds correct pattern
