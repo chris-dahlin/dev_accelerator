@@ -12,13 +12,18 @@ CKnave = Symbol("C is a Knave")
 knowledgeBase = And(
     Or(AKnight, AKnave),
     Or(BKnight, BKnave),
-    Or(CKnight, CKnave)
+    Or(CKnight, CKnave),
+    Not(And(AKnight, AKnave)),
+    Not(And(BKnight, BKnave)),
+    Not(And(CKnight, CKnave)),
 )
 
 # Puzzle 0
 # A says "I am both a knight and a knave."
 knowledge0 = And(
-    # TODO
+    knowledgeBase,
+    Implication(AKnight, And(AKnight, AKnave)),
+    Implication(AKnight, Not(And(AKnight, AKnave))),
 )
 
 # Puzzle 1
