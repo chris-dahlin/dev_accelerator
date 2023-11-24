@@ -33,14 +33,17 @@ knowledge1 = And(
     knowledgeBase,
     Implication(AKnight, And(AKnave, BKnave)),
     Implication(AKnave, Not(And(AKnave, BKnave))),
-
 )
 
 # Puzzle 2
 # A says "We are the same kind."
 # B says "We are of different kinds."
 knowledge2 = And(
-    # TODO
+    knowledgeBase,
+    Implication(AKnight, Or(And(AKnight, BKnight), And(AKnave, BKnave))),
+    Implication(AKnave, Not(Or(And(AKnight, BKnight), And(AKnave, BKnave)))),
+    Implication(BKnight, Or(And(AKnight, BKnave), And(AKnave, BKnight))),
+    Implication(BKnave, Not(Or(And(AKnight, BKnave), And(AKnave, BKnight)))),
 )
 
 # Puzzle 3
