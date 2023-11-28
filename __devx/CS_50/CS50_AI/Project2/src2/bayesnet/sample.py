@@ -38,3 +38,11 @@ for i in range(N):
     if sample["train"] == "delayed":
         data.append(sample["appointment"])
 print(Counter(data))
+
+# Sample Changes with every run
+# first
+# Counter({'attend': 1271, 'miss': 886})
+# second 
+# Counter({'attend': 1294, 'miss': 795})
+# third
+# Counter({'attend': 1259, 'miss': 822})
