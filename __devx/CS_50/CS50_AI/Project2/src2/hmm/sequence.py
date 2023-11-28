@@ -17,3 +17,14 @@ observations = [
 predictions = model.predict(observations)
 for prediction in predictions:
     print(model.states[prediction].name)
+
+# First Prompt
+# rain
+# rain
+# sun
+# rain
+# rain
+# rain
+# rain
+# sun
+# sun
