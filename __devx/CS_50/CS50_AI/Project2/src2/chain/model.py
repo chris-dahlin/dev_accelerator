@@ -19,3 +19,7 @@ model = MarkovChain([start, transitions])
 
 # Sample 50 states from chain
 print(model.sample(50))
+
+
+
+# ['rain', 'sun', 'sun', 'sun', 'sun', 'sun', 'sun', 'sun', 'rain', 'sun', 'sun', 'sun', 'sun', 'sun', 'sun', 'sun', 'sun', 'sun', 'sun', 'rain', 'rain', 'rain', 'rain', 'rain', 'sun', 'sun', 'rain', 'rain', 'rain', 'rain', 'sun', 'sun', 'sun', 'rain', 'sun', 'sun', 'rain', 'rain', 'rain', 'rain', 'rain', 'rain', 'sun', 'sun', 'sun', 'sun', 'sun', 'rain', 'rain', 'sun']
