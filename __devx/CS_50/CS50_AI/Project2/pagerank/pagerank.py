@@ -126,3 +126,15 @@ def iterate_pagerank(corpus, damping_factor):
 
 if __name__ == "__main__":
     main()
+
+# First prompt - Corpus0
+# PageRank Results from Sampling (n = 10000)
+#   1.html: 0.2204
+#   2.html: 0.4292
+#   3.html: 0.2204
+#   4.html: 0.1299
+# PageRank Results from Iteration
+#   1.html: 0.1437
+#   2.html: 0.5687
+#   3.html: 0.1437
+#   4.html: 0.1437
