@@ -196,8 +196,9 @@ for i in range(15):
     s.add_house(random.randrange(s.height), random.randrange(s.width))
 
 # Use local search to determine hospital placement
-hospitals = s.hill_climb(image_prefix="hospitals", log=True)
+# hospitals = s.hill_climb(image_prefix="hospitals", log=True)
 
+hospitals = s.random_restart(20, image_prefix="hospitals", log=True)
 
 # Hill climb prompt 1
 # Initial state: cost 82
@@ -212,3 +213,26 @@ hospitals = s.hill_climb(image_prefix="hospitals", log=True)
 # Found better neighbor: cost 66
 # Found better neighbor: cost 65
 # Found better neighbor: cost 63
+
+
+# Random Restart 20 times
+# 0: Found new best state: cost 87
+# 1: Found new best state: cost 58
+# 2: Found state: cost 64
+# 3: Found state: cost 72
+# 4: Found new best state: cost 56
+# 5: Found state: cost 73
+# 6: Found state: cost 60
+# 7: Found state: cost 66
+# 8: Found state: cost 56
+# 9: Found state: cost 62
+# 10: Found state: cost 61
+# 11: Found state: cost 56
+# 12: Found state: cost 63
+# 13: Found state: cost 60
+# 14: Found state: cost 57
+# 15: Found state: cost 68
+# 16: Found state: cost 58
+# 17: Found state: cost 58
+# 18: Found new best state: cost 53
+# 19: Found state: cost 62
