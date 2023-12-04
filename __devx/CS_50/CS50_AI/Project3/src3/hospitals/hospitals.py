@@ -197,3 +197,18 @@ for i in range(15):
 
 # Use local search to determine hospital placement
 hospitals = s.hill_climb(image_prefix="hospitals", log=True)
+
+
+# Hill climb prompt 1
+# Initial state: cost 82
+# Found better neighbor: cost 76
+# Found better neighbor: cost 74
+# Found better neighbor: cost 73
+# Found better neighbor: cost 72
+# Found better neighbor: cost 71
+# Found better neighbor: cost 70
+# Found better neighbor: cost 69
+# Found better neighbor: cost 67
+# Found better neighbor: cost 66
+# Found better neighbor: cost 65
+# Found better neighbor: cost 63
