@@ -236,3 +236,5 @@ hospitals = s.random_restart(20, image_prefix="hospitals", log=True)
 # 17: Found state: cost 58
 # 18: Found new best state: cost 53
 # 19: Found state: cost 62
+
+# Hospital prompt updates
