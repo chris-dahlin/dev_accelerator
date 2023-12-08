@@ -63,3 +63,5 @@ def consistent(assignment):
 
 solution = backtrack(dict())
 print(solution)
+
+# Solution {'A': 'Monday', 'B': 'Tuesday', 'C': 'Wednesday', 'D': 'Wednesday', 'E': 'Monday', 'F': 'Tuesday', 'G': 'Wednesday'}
