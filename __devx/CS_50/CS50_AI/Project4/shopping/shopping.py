@@ -62,8 +62,13 @@ def load_data(filename):
     evidence = []
     labels = []
 
+    months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
     with open(filename, 'r') as files:
         reader = csv.reader(files)
+        
+        next(reader, None)
+        
         for row in reader:
 
             if row[-1] == 'TRUE':
@@ -71,7 +76,7 @@ def load_data(filename):
             else:
                 labels.append(0)
 
-            evidence.append(
+            evidence.append([
                 int(row[0]),
                 float(row[1]),
                 int(row[2]),
@@ -82,24 +87,24 @@ def load_data(filename):
                 float(row[7]),
                 float(row[8]),
                 float(row[9]),
-
+                months.index(row[10]) + 1,
                 int(row[11]),
                 int(row[12]),
                 int(row[13]),
                 int(row[14]),
                 1 if row[15] == 'Returning_Visitor' else 0,
                 1 if row[16] == 'TRUE' else 0,
-
-
-            )
-
+            ])
+    return evidence, labels
 
 def train_model(evidence, labels):
     """
     Given a list of evidence lists and a list of labels, return a
     fitted k-nearest neighbor model (k=1) trained on the data.
     """
-    raise NotImplementedError
+    neigh = KNeighborsClassifier(n_neighbors=1)
+    neigh.fit(evidence, labels)
+    return neigh
 
 
 def evaluate(labels, predictions):
@@ -117,7 +122,27 @@ def evaluate(labels, predictions):
     representing the "true negative rate": the proportion of
     actual negative labels that were accurately identified.
     """
-    raise NotImplementedError
+    
+    true_predictions = 0
+    true_labels = 0
+    false_predictions = 0
+    false_labels = 0
+
+    for i in range(len(labels)):
+        if labels[i] ==1:
+            true_labels += 1
+            if predictions[i] == 1:
+                true_predictions += 1
+        else:
+            false_labels += 1
+            if predictions[i] == 0:
+                false_predictions += 1
+
+
+    sensitivity = true_predictions / true_labels
+    specificity = false_predictions / false_labels
+
+    return sensitivity, specificity
 
 
 if __name__ == "__main__":
