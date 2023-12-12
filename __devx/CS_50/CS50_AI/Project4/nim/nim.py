@@ -183,8 +183,8 @@ class NimAI():
         if not possible_actions:
             return None
         
-        if epsilon and random.uniform(0, 1) < self.epsilon:
-            return random.choice(possible_actions)
+        if epsilon and random.uniform(0,1) < self.epsilon:
+            return random.choice(list(possible_actions))
         
         q_values = {}
         
@@ -192,7 +192,7 @@ class NimAI():
             
             q_value = self.get_q_value(state, action)
 
-            q_values[actions] = q_value
+            q_values[action] = q_value
 
         best_action = max(q_values, key=q_values.get)
 
