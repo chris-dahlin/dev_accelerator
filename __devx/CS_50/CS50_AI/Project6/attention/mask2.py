@@ -46,7 +46,18 @@ def get_mask_token_index(mask_token_id, inputs):
     `None` if not present in the `inputs`.
     """
     
-    
+    # Get the flattened token IDs from the input tensor
+    flat_input_ids = tf.reshape(inputs["input_ids"], [-1])
+
+    # Find the index of the mask token
+    mask_token_index = tf.where(flat_input_ids == mask_token_id)
+
+    if tf.size(mask_token_index) == 0:
+        return None
+    else:
+        return mask_token_index[0].numpy().item()
+
+
 
 
 
@@ -55,9 +66,10 @@ def get_color_for_attention_score(attention_score):
     Return a tuple of three integers representing a shade of gray for the
     given `attention_score`. Each value should be in the range [0, 255].
     """
-    # TODO: Implement this function
-    raise NotImplementedError
-
+    
+    # Map attention score to a grayscale value
+    gray_value = int(attention_score * 255)
+    return (gray_value, gray_value, gray_value)
 
 
 def visualize_attentions(tokens, attentions):
@@ -70,13 +82,12 @@ def visualize_attentions(tokens, attentions):
     include both the layer number (starting count from 1) and head number
     (starting count from 1).
     """
-    # TODO: Update this function to produce diagrams for all layers and heads.
-    generate_diagram(
-        1,
-        1,
-        tokens,
-        attentions[0][0][0]
-    )
+   
+      # Iterate through attention layers and heads
+    for layer_num, layer_attentions in enumerate(attentions):
+        for head_num, head_attention in enumerate(layer_attentions[0]):
+            generate_diagram(layer_num + 1, head_num + 1, tokens, head_attention)
+
 
 
 def generate_diagram(layer_number, head_number, tokens, attention_weights):
