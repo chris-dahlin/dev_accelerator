@@ -120,7 +120,22 @@ class NimAI():
         `alpha` is the learning rate, and `new value estimate`
         is the sum of the current reward and estimated future rewards.
         """
-        
+        # Creating a unique key by converting the state to a tuple and combining it with the action
+        key = (tuple(state), action)
+
+
+        # Calculating the new Q-value using the Q-learning update formula
+        # Q-learning update formula: Q(s, a) = Q(s, a) + α * [R(s, a) + γ * max(Q(s', a')) - Q(s, a)]
+        # where:
+        # - α (alpha) is the learning rate, controlling the weight of the new information
+        # - R(s, a) is the immediate reward for taking action a in state s
+        # - γ (gamma) is the discount factor for future rewards
+        # - max(Q(s', a')) is the maximum Q-value for the next state s' and all possible actions a'
+        # - Q(s, a) is the current Q-value for the given state-action pair
+        new_q_value = old_q + self.alpha * (reward + future_rewards - old_q)
+
+        # Updating the Q-value in the Q-table for the given state-action pair
+        self.q[key] = new_q_value
 
     def best_future_reward(self, state):
         """
@@ -132,7 +147,21 @@ class NimAI():
         Q-value in `self.q`. If there are no available actions in
         `state`, return 0.
         """
-        raise NotImplementedError
+        possible_actions = Nim.available_actions(state)
+
+        if not possible_actions:
+            return 0
+        
+        max_value = -float('inf')
+
+        for action in possible_actions:
+            q_value = self.get_q_value(state, action)
+
+            if q_value > max_value:
+                max_value = q_value
+        
+        return max_value
+            
 
     def choose_action(self, state, epsilon=True):
         """
