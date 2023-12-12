@@ -83,7 +83,7 @@ def visualize_attentions(tokens, attentions):
     (starting count from 1).
     """
    
-      # Iterate through attention layers and heads
+    # Iterate through attention layers and heads
     for layer_num, layer_attentions in enumerate(attentions):
         for head_num, head_attention in enumerate(layer_attentions[0]):
             generate_diagram(layer_num + 1, head_num + 1, tokens, head_attention)
