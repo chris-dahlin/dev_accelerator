@@ -162,5 +162,3 @@ def normalize(probabilities):
 
 if __name__ == "__main__":
     main()
-
-    # Project 2 - Complete
