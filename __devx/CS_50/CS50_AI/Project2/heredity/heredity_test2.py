@@ -59,7 +59,7 @@ def main():
         }
         for person in people
     }
-    print(probabilities)
+
     # Loop over all sets of people who might have the trait
     names = set(people)
     for have_trait in powerset(names):
@@ -137,45 +137,65 @@ def joint_probability(people, one_gene, two_genes, have_trait):
         * everyone in set `two_genes` has two copies of the gene, and
         * everyone not in `one_gene` or `two_gene` does not have the gene, and
         * everyone in set `have_trait` has the trait, and
-        * everyone not in set `have_trait` does not have the trait.
+        * everyone not in set` have_trait` does not have the trait.
     """
-    # Initialize the joint probability to 1.0, as we will be multiplying probabilities
-    probability = 1.0
 
+    joint_prob = 1
 
-    # Loop through each person in the given set of people
-    for person in people:
-        
-        # Determine the number of genes for the current person based on the input sets
-        # If the person is in the set two_genes, they have two copies of the gene
-        # If the person is in the set one_gene, they have one copy of the gene
-        # If the person is not in either set, they have no copies of the gene
-        num_genes = 2 if person in two_genes else 1 if person in one_gene else 0
-        
-        # Retrieve the probability of having the specified number of genes from the PROBS dictionary
-        gene_prob = PROBS["gene"][num_genes]
-        
-        # Determine the trait probability for the current person based on the input set have_trait
-        # If the person is in have_trait, use the probability of having the trait from the PROBS dictionary
-        # If the person is not in have_trait, use the probability of not having the trait (1 - probability of having the trait)
-        trait_prob = PROBS["trait"][num_genes][person in have_trait]
-
-        # Multiply the current joint probability by the product of gene and trait probabilities for the current person
-        probability *= gene_prob * trait_prob
-
-
-    # Loop through each person in the given set of people again to account for mutations
+    # Iterate all people in the family:
 
     for person in people:
-    # If the person is in the set two_genes, multiply the joint probability by the probability of no mutation
-    # If the person is in the set one_gene, multiply the joint probability by the probability of mutation
-        if person in two_genes:
-            probability *= (1 - PROBS["mutation"])
-        elif person in one_gene:
-            probability *= PROBS["mutation"]
 
-    # Return the final joint probability
-    return probability
+        person_prob = 1
+        person_genes = (2 if person in two_genes else 1 if person in one_gene else 0)
+        person_trait = person in have_trait
+
+        mother = people[person]['mother']
+        father = people[person]['father']
+
+        # If person has no parents, use standard gene probability:
+        if not mother and not father:
+            person_prob *= PROBS['gene'][person_genes]
+
+        # Otherwise need to calculate probabilit of num_genes from parents:
+        else:
+            mother_prob = inherit_prob(mother, one_gene, two_genes)
+            father_prob = inherit_prob(father, one_gene, two_genes)
+
+            if person_genes == 2:
+              person_prob *= mother_prob * father_prob
+            elif person_genes == 1:
+              person_prob *= (1 - mother_prob) * father_prob + (1 - father_prob) * mother_prob
+            else:
+              person_prob *= (1 - mother_prob) * (1 - father_prob)
+
+        # Multiply by the probability of the person with X genes having / not having the trait:
+        person_prob *= PROBS['trait'][person_genes][person_trait]
+
+        joint_prob *= person_prob
+
+    # Return the calculated joint probability of this 'possible world'
+    return joint_prob
+
+
+def inherit_prob(parent_name, one_gene, two_genes):
+    """
+    joint_probability helper function
+
+    Returns the probability of a parent giving a copy of the mutated gene to their child.
+
+    Takes:
+    - parent_name - the name of the parent
+    - one_gene - set of people having 1 copy of the gene
+    - two_genes - set of people having two copies of the gene.
+    """
+
+    if parent_name in two_genes:
+        return 1 - PROBS['mutation']
+    elif parent_name in one_gene:
+        return 0.5
+    else:
+        return PROBS['mutation']
 
 
 def update(probabilities, one_gene, two_genes, have_trait, p):
@@ -186,53 +206,31 @@ def update(probabilities, one_gene, two_genes, have_trait, p):
     the person is in `have_gene` and `have_trait`, respectively.
     """
 
-    """Parameters:
-    - probabilities: A dictionary containing probabilities for each person, gene, and trait.
-    - one_gene: A set of people who have one copy of the gene.
-    - two_genes: A set of people who have two copies of the gene.
-    - have_trait: A set of people who have the specified trait.
-    - p: The joint probability to be added to the existing probabilities.
-    """
-    
-    # Loop through each person in the probabilities dictionary
+    # Iterate over all people:
     for person in probabilities:
-        
-        # Determine the number of genes for the current person based on the input sets
-        # If the person is in the set two_genes, they have two copies of the gene
-        # If the person is in the set one_gene, they have one copy of the gene
-        # If the person is not in either set, they have no copies of the gene
-        num_genes = 2 if person in two_genes else 1 if person in one_gene else 0
+        person_genes = (2 if person in two_genes else 1 if person in one_gene else 0)
+        person_trait = person in have_trait
 
-        # Update the gene distribution for the current person with the new joint probability
-        # The value to be updated is based on the number of genes the person has
-        probabilities[person]["gene"][num_genes] += p
-        # Update the trait distribution for the current person with the new joint probability
-        # The value to be updated is based on whether the person has the specified trait
-        probabilities[person]["trait"][person in have_trait] += p
+        # Update person probability distributions for gene and trait
+        probabilities[person]['gene'][person_genes] += p
+        probabilities[person]['trait'][person_trait] += p
 
 
 def normalize(probabilities):
     """
     Update `probabilities` such that each probability distribution
     is normalized (i.e., sums to 1, with relative proportions the same).
-
-    Parameters:
-    - probabilities: A dictionary containing probabilities for each person, gene, and trait.
     """
-
-    # Loop through each person in the probabilities dictionary
+    # Iterate over all people:
     for person in probabilities:
-        
-        # Loop through each distribution type for the current person (e.g., "gene", "trait")
-        for field in probabilities[person]:
-            
-            # Calculate the total probability for the current distribution type
-            total = sum(probabilities[person][field].values())
-            
-            # Loop through each possible value in the current distribution type
-            for value in probabilities[person][field]:
-                # Normalize the probability by dividing it by the total probability for the current distribution type
-                probabilities[person][field][value] /= total
+
+        # Calculate the total probability for each distribution
+        gene_prob_sum = sum(probabilities[person]['gene'].values())
+        trait_prob_sum = sum(probabilities[person]['trait'].values())
+
+        # Normalise each distribution to 1:
+        probabilities[person]['gene'] = { genes: (prob / gene_prob_sum) for genes, prob in probabilities[person]['gene'].items()}
+        probabilities[person]['trait'] = { trait: (prob / trait_prob_sum) for trait, prob in probabilities[person]['trait'].items()}
 
 
 if __name__ == "__main__":
