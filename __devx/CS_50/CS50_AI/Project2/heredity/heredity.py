@@ -59,7 +59,7 @@ def main():
         }
         for person in people
     }
-    print(probabilities)
+    
     # Loop over all sets of people who might have the trait
     names = set(people)
     for have_trait in powerset(names):
