@@ -71,7 +71,7 @@ class BigramLanguageModel(nn.Module):
 
         # idx and targets are both (B,T) tensor of integers
         tok_emb = self.token_embedding_table(idx) # (B,T,C)
-        logits = self.lm_head(tok_emd) # (B,T,C)
+        logits = self.lm_head(tok_emb) # (B,T, vocab_size)
  
         if targets is None:
             loss = None
