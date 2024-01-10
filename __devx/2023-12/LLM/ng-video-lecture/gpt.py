@@ -225,3 +225,37 @@ print(decode(m.generate(context, max_new_tokens=500)[0].tolist()))
 #open('more.txt', 'w').write(decode(m.generate(context, max_new_tokens=10000)[0].tolist()))
 
 # https://www.youtube.com/watch?v=kCc8FmEb1nY&t=783s
+
+# First successful run - took over 5 hours via cpu
+# 10.788929 M parameters
+# step 0: train loss 4.2221, val loss 4.2306
+# step 500: train loss 1.7457, val loss 1.8938
+# step 1000: train loss 1.4018, val loss 1.6233
+# step 1500: train loss 1.2685, val loss 1.5372
+# step 2000: train loss 1.1944, val loss 1.5070
+# step 2500: train loss 1.1273, val loss 1.4876
+# step 3000: train loss 1.0698, val loss 1.4780
+# step 3500: train loss 1.0158, val loss 1.5019
+# step 4000: train loss 0.9618, val loss 1.5022
+# step 4500: train loss 0.9109, val loss 1.5428
+# step 4999: train loss 0.8522, val loss 1.5769
+
+# O loving woe! cousin!
+# Three lust a certain nece
+# That pays out unflour, that he doth must end:
+# He have said this. Upon my respise,
+# Master, if my poor joys must be content.
+
+# MERCUTIO:
+# O, this must believe in modestimode!
+
+# QUEEN:
+# That you do love him rope in digress' friends' foule,
+# That this sentless next like apprehood shung him.
+# Your vantage may unsatiate you the king!
+# I marry him, there I make my women name lord.
+
+# ISABELLA:
+# I can believe you my liege;
+# I fear thee have a perpetty passion need;
+# A
