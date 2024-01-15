@@ -262,3 +262,37 @@ print(decode(m.generate(context, max_new_tokens=500)[0].tolist()))
 
 
 # Ran second process Saturday 1/13 around 3 PM - Still running 1/14 9:30 PM
+
+# Second run completed - Following data below
+
+# step 0: train loss 4.2221, val loss 4.2306
+# step 500: train loss 1.7396, val loss 1.8956
+# step 1000: train loss 1.3906, val loss 1.6053
+# step 1500: train loss 1.2759, val loss 1.5396
+# step 2000: train loss 1.1891, val loss 1.4994
+# step 2500: train loss 1.1297, val loss 1.4925
+# step 3000: train loss 1.0691, val loss 1.4908
+# step 3500: train loss 1.0151, val loss 1.5042
+# step 4000: train loss 0.9706, val loss 1.5168
+# step 4500: train loss 0.9104, val loss 1.5425
+# step 4999: train loss 0.8578, val loss 1.5728
+
+# knife both shake; and feod Rhaven left-ply head.
+
+# AUTOLYCUS:
+# As the lunass my that cannot appeal, here changs from
+# lady of sours, nus. Good lady: 'tis brought and you, we were so
+# to visither, to plame about to my place at yourself.
+
+# VOLUANIA:
+# I did but love with a poor stable to it.
+
+# Clown:
+# As I shall chade for you: My women? letters have
+# oppower asked silence; whereft you shall be
+# level to him one.
+
+# Shepherd:
+# We are his innocent, but in hand, with the
+# issue officer.
+# Two herd ingrate Vueti. She 
