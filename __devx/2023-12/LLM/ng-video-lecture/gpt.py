@@ -259,3 +259,6 @@ print(decode(m.generate(context, max_new_tokens=500)[0].tolist()))
 # I can believe you my liege;
 # I fear thee have a perpetty passion need;
 # A
+
+
+# Ran second process Saturday 1/13 around 3 PM - Still running 1/14 9:30 PM
